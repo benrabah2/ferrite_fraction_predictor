@@ -65,7 +65,7 @@ If you use this code, please cite:
 
 Benrabah, Imed‐Eddine, Guillaume Geandier, Olha Nakonechna, Benoît Denand, Hugo Van Landeghem, Alexis Deschamps, and Sébastien YP Allain. "Deep Learning for Real‐Time Phase Quantification from X‐ray Diffraction: Toward High‐Throughput Steel Microstructure Mapping." *Advanced Engineering Materials* (2026): e202503172. https://doi.org/10.1002/adem.202503172
 
-Please also reference the model GitHub repository: <ADD_REPO_URL_HERE>
+Please also reference the model GitHub repository: https://github.com/benrabah2/ferrite_fraction_predictor
 
 Examples that are accepted with `-n SAMPLE`:
 - `SAMPLE_00001.dat`
