@@ -17,6 +17,10 @@ pip install -r requirements.txt
 ```sh
 python predict.py /path/to/your/data_folder -w WAVELENGTH -s START -e END
 ```
+If you omit `-s/--start` and `-e/--end`, the script will use the min and max index found in the folder:
+```sh
+python predict.py /path/to/your/data_folder -w WAVELENGTH
+```
 The script writes results to `data_folder/results/predicted_ferrite_fraction_<DATASET_NAME>.txt`.
 If `-n/--name` is not provided, it uses the folder name as `<DATASET_NAME>` for the output file.
 
