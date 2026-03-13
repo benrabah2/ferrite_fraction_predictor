@@ -35,6 +35,10 @@ If you omit `-s/--start` and `-e/--end`, the script will use the min and max ind
 ```sh
 python predict.py /path/to/your/data_folder -w WAVELENGTH
 ```
+If your data is already in q (not 2-theta), disable conversion and you do not need `-w`:
+```sh
+python predict.py /path/to/your/data_folder -s START -e END --no-convert-to-q
+```
 The script writes results to `data_folder/results/predicted_ferrite_fraction_<DATASET_NAME>.txt`.
 If `-n/--name` is not provided, it uses the folder name as `<DATASET_NAME>` for the output file.
 
@@ -55,6 +59,8 @@ Recommendation:
 Each data file must be a text file with at least two columns:
 - column 1: 2-theta
 - column 2: intensity
+
+If your data is already in q, use `--no-convert-to-q` and do not pass `-w/--wavelength`.
 
 File naming (two modes):
 - If you provide `-n/--name`, filenames must start with that name.

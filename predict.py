@@ -23,13 +23,15 @@ from config import (
 
 def _get_dataset_config(name, start, end, wave_length):
     if wave_length is None:
-        raise ValueError("Wavelength is required. Use -w/--wavelength.")
+        return name, start, end, wave_length
     return name, start, end, wave_length
 
 
 def _load_profile(file_name, wave_length):
     data = np.loadtxt(file_name)[:, :2]
     if Convert_to_q:
+        if wave_length is None:
+            raise ValueError("Wavelength is required when converting 2-theta to q. Use -w/--wavelength or pass --no-convert-to-q.")
         data = Convert_2theta_to_q(data, wave_length, Q_MIN, Q_MAX)
     if shape_correction:
         data = Shape_Correction_Function(data, nb_of_points_per_profile)
@@ -176,7 +178,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process data for ferrite fraction prediction.')
     parser.add_argument('data_folder', type=str, help='Directory containing the data files')
     parser.add_argument('-n', '--name', type=str, required=False, help='Dataset name used for file prefix (optional)')
-    parser.add_argument('-w', '--wavelength', type=float, required=True, help='Wavelength for the dataset')
+    parser.add_argument('-w', '--wavelength', type=float, required=False, help='Wavelength for the dataset (required if converting 2-theta to q)')
     parser.add_argument('-s', '--start', type=int, required=False, help='Start index for the dataset (optional)')
     parser.add_argument('-e', '--end', type=int, required=False, help='End index for the dataset (optional)')
     parser.add_argument('--q-min', type=float, default=Q_MIN, help='Minimum q value (default from config)')
@@ -201,6 +203,9 @@ if __name__ == "__main__":
     nb_of_points_per_profile = args.nb_points
     plot_data = args.plot
     batch_size = args.batch_size
+
+    if Convert_to_q and args.wavelength is None:
+        raise ValueError("Wavelength is required when converting 2-theta to q. Use -w/--wavelength or pass --no-convert-to-q.")
 
     main(
         args.data_folder,
